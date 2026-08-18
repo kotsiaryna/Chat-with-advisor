@@ -1,4 +1,5 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { ChatPanel } from "@/components/chat-panel";
 import { MeetingsList } from "@/components/meetings-list";
 import { makeQueryClient } from "@/lib/get-query-client";
 import { getMeetings } from "@/lib/meetings";
@@ -17,9 +18,12 @@ export default async function ChatPage() {
       <h1 className="text-2xl font-semibold tracking-tight">
         Чат с консультантом
       </h1>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <MeetingsList />
-      </HydrationBoundary>
+      <div className="grid flex-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <MeetingsList />
+        </HydrationBoundary>
+        <ChatPanel />
+      </div>
     </main>
   );
 }
